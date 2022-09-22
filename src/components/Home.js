@@ -16,6 +16,7 @@ function Home(props) {
         setDataToDisplay(res);
       })
       .catch((err) => console.log(err));
+      
   }, []);
 
   function searchAlgo() {

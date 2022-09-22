@@ -2,19 +2,32 @@ import React, { useEffect, useState } from "react";
 import RemoveFromCartCard from "./RemoveFromCartCard";
 
 function Cart(props) {
-  //   console.log(props);
-  const { data: dataToDisplay, removeFromCartHandler } = props;
-  // const [localData, setLocalData] = useState([]);
-  // useEffect(() => {
-  //   // if (dataToDisplay) {
-  //   //   localStorage.setItem("cartData", JSON.stringify(dataToDisplay));
-  //   // }
-  //   setLocalData(JSON.parse(localStorage.getItem("cartData")));
-  // }, []);
-  // if (dataToDisplay) {
-  //   localStorage.setItem("cartData", JSON.stringify(dataToDisplay));
-  // }
-  // const localData = JSON.parse(localStorage.getItem("cartData"));
+  // console.log(props);
+  const {
+    data: dataToDisplay,
+    addToCartHandler,
+    removeFromCartHandler,
+  } = props;
+
+  useEffect(() => {
+    const cartData = JSON.parse(localStorage.getItem("cartData"));
+    // console.log(cartData)
+
+    if (cartData && dataToDisplay.length === 0) {
+      console.log("cartData", cartData);
+      addToCartHandler(cartData);
+      localStorage.clear();
+      // cartData.map((data) => addToCartHandler(data));
+    }
+  }, []);
+
+  useEffect(() => {
+    console.log("dataToDisplay", dataToDisplay);
+    if (dataToDisplay.length) {
+      localStorage.clear();
+      localStorage.setItem("cartData", JSON.stringify(dataToDisplay));
+    }
+  }, [dataToDisplay]);
 
   return (
     <>

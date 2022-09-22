@@ -33,7 +33,7 @@ function BootstrapCard({ data, addToCartHandler }) {
               {!category ? "" : category} {count} Left
             </small>
           </p>
-          <button className="btn btn-sm btn-dark" onClick={() => addToCartHandler(data)}>Add To Cart: {price}</button>
+          <button className="btn btn-sm btn-dark" onClick={() => addToCartHandler([data])}>Add To Cart: {price}</button>
           {/* <a rel="noreferrer" href={newsUrl} target="_blank" className="btn btn-sm btn-dark">Read More</a> */}
         </div>
       </div>
