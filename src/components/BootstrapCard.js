@@ -1,4 +1,5 @@
-function BootstrapCard({ data }) {
+function BootstrapCard({ data, addToCartHandler }) {
+  
   const { id, title, price, description, category, image, rating } = data;
   const { rate, count } = rating;
   // console.log(data);
@@ -32,7 +33,7 @@ function BootstrapCard({ data }) {
               {!category ? "" : category} {count} Left
             </small>
           </p>
-          <button className="btn btn-sm btn-dark">Add To Cart: {price}</button>
+          <button className="btn btn-sm btn-dark" onClick={() => addToCartHandler(data)}>Add To Cart: {price}</button>
           {/* <a rel="noreferrer" href={newsUrl} target="_blank" className="btn btn-sm btn-dark">Read More</a> */}
         </div>
       </div>

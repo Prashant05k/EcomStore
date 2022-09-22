@@ -1,13 +1,11 @@
-import logo from "./logo.svg";
-import "./App.css";
-import Home from "./components/Home";
-import NavBar from "./components/NavBar";
+import HomeBankContainer from "./container/HomeContainer";
+import NavBarContainer from "./container/NavBarContainer";
 
 function App() {
   return (
     <>
-      <NavBar />
-      <Home />
+      <NavBarContainer />
+      <HomeBankContainer />
     </>
   );
 }
