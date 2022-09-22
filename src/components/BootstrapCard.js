@@ -1,7 +1,20 @@
+import { useEffect } from "react";
+
 function BootstrapCard({ data, addToCartHandler }) {
   
   const { id, title, price, description, category, image, rating } = data;
   const { rate, count } = rating;
+  useEffect(() => {
+    const arrIds = [1,3,5];
+    if(arrIds.includes(id)){
+      setTimeout(() => {
+        let btn = document.getElementById(`sold-out${id}`);
+        // console.log('ran after 3sec')
+        btn.innerText = 'Sold Out';
+        btn.disabled = true;
+      }, 1000 * 60)
+    }
+  }, [])
   // console.log(data);
   return (
     <div className="my-3">
@@ -33,7 +46,7 @@ function BootstrapCard({ data, addToCartHandler }) {
               {!category ? "" : category} {count} Left
             </small>
           </p>
-          <button className="btn btn-sm btn-dark" onClick={() => addToCartHandler([data])}>Add To Cart: {price}</button>
+          <button className="btn btn-sm btn-dark" id={`sold-out${id}`} onClick={() => addToCartHandler([data])}>Add To Cart: {price}</button>
           {/* <a rel="noreferrer" href={newsUrl} target="_blank" className="btn btn-sm btn-dark">Read More</a> */}
         </div>
       </div>

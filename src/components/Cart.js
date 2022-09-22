@@ -14,7 +14,7 @@ function Cart(props) {
     // console.log(cartData)
 
     if (cartData && dataToDisplay.length === 0) {
-      console.log("cartData", cartData);
+      // console.log("cartData", cartData);
       addToCartHandler(cartData);
       localStorage.clear();
       // cartData.map((data) => addToCartHandler(data));
@@ -22,7 +22,7 @@ function Cart(props) {
   }, []);
 
   useEffect(() => {
-    console.log("dataToDisplay", dataToDisplay);
+    // console.log("dataToDisplay", dataToDisplay);
     if (dataToDisplay.length) {
       localStorage.clear();
       localStorage.setItem("cartData", JSON.stringify(dataToDisplay));
