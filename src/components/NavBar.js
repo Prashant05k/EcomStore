@@ -1,15 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import { Link } from "react-router-dom";
 
 function NavBar(props) {
-  // console.log(props);
-  // function handleSearch(e) {
-  //   const searchData = e.target.value.toLowerCase();
-  //   // console.log('searchData', searchData);
-  //   props.setLiftStateSearchData(searchData);
-  // }
+  
   function debounce(fn, d) {
     let timer;
     return function (e) {
@@ -30,7 +25,7 @@ function NavBar(props) {
     <>
       <Navbar bg="light" expand="lg">
         <Container>
-          <Navbar.Brand href="#home">EcomStore</Navbar.Brand>
+          <Navbar.Brand href="/">EcomStore</Navbar.Brand>
           <input type="text" onChange={callLater} />
           <Link to="/cart">
             <h6>Cart: {props.data.length}</h6>

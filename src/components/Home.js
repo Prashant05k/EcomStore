@@ -4,9 +4,9 @@ import { useEffect } from "react";
 import BootstrapCard from "./BootstrapCard";
 
 function Home(props) {
-  // console.log('Home', props)
   const [storeData, setStoreData] = useState([]);
   const [dataToDisplay, setDataToDisplay] = useState([]);
+  const [pageCount, setPageCount] = useState(1);
 
   useEffect(() => {
     fetch("https://fakestoreapi.com/products")
@@ -16,7 +16,6 @@ function Home(props) {
         setDataToDisplay(res);
       })
       .catch((err) => console.log(err));
-      
   }, []);
 
   function searchAlgo() {
@@ -33,20 +32,68 @@ function Home(props) {
     searchAlgo();
   }, [props.liftStateSearchData]);
 
+  function pagenation(buttonName, value) {
+    {
+      document.getElementById(buttonName).disabled = value;
+    }
+  }
+
   return (
     <>
       <div className="container">
         <div className="row">
           {dataToDisplay
-            ? dataToDisplay.map((data) => (
-                <div className="col-md-2 col-sm-4" key={data.id}>
-                  <BootstrapCard
-                    data={data}
-                    addToCartHandler={props.addToCartHandler}
-                  />
-                </div>
-              ))
+            ? dataToDisplay.map((data) => {
+                if (
+                  data.id >= (pageCount - 1) * 10 &&
+                  data.id <= pageCount * 10
+                ) {
+                  return (
+                    <div className="col-md-2 col-sm-4" key={data.id}>
+                      <BootstrapCard
+                        data={data}
+                        addToCartHandler={props.addToCartHandler}
+                      />
+                    </div>
+                  );
+                }
+                return;
+              })
             : null}
+        </div>
+
+        <div className="container d-flex justify-content-between">
+          <button
+            type="button"
+            className="btn btn-dark"
+            id="buttonLeft"
+            onClick={() => {
+              if (pageCount * 10 >= dataToDisplay.length) {
+                setPageCount(pageCount - 1);
+                pagenation("buttonRight", false);
+              } else {
+                pagenation("buttonLeft", true);
+              }
+            }}
+          >
+            {" "}
+            &larr; Previous
+          </button>
+          <button
+            type="button"
+            className="btn btn-dark"
+            id="buttonRight"
+            onClick={() => {
+              if (pageCount * 10 <= dataToDisplay.length) {
+                setPageCount(pageCount + 1);
+                pagenation("buttonLeft", false);
+              } else {
+                pagenation("buttonRight", true);
+              }
+            }}
+          >
+            Next &rarr;
+          </button>
         </div>
       </div>
     </>
