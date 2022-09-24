@@ -1,22 +1,40 @@
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
-import BootstrapCard from "./BootstrapCard";
+import AddToCart from "./AddToCart";
+import Quote from "./Quote";
 
 function Home(props) {
+  
   const [storeData, setStoreData] = useState([]);
   const [dataToDisplay, setDataToDisplay] = useState([]);
   const [pageCount, setPageCount] = useState(1);
 
   useEffect(() => {
-    fetch("https://fakestoreapi.com/products")
-      .then((res) => res.json())
-      .then((res) => {
-        setStoreData(res);
-        setDataToDisplay(res);
-      })
-      .catch((err) => console.log(err));
+    async function Fetch() {
+      let URL = "https://fakestoreapi.com/products";
+      await fetch(URL)
+        .then((res) => res.json())
+        .then((res) => {
+          setStoreData(res);
+          setDataToDisplay(res);
+        })
+        .catch((err) => console.log(err));
+    }
+    Fetch();
   }, []);
+
+  function previousNextPageCheck() {
+    if (pageCount === 1) {
+      pagenation("buttonLeft", true);
+    } else if (pageCount * 10 >= dataToDisplay.length) {
+      pagenation("buttonRight", true);
+    }
+  }
+
+  useEffect(() => {
+    previousNextPageCheck();
+  }, [pageCount]);
 
   function searchAlgo() {
     const userInput = props.liftStateSearchData;
@@ -33,9 +51,7 @@ function Home(props) {
   }, [props.liftStateSearchData]);
 
   function pagenation(buttonName, value) {
-    {
-      document.getElementById(buttonName).disabled = value;
-    }
+    document.getElementById(buttonName).disabled = value;
   }
 
   return (
@@ -50,7 +66,7 @@ function Home(props) {
                 ) {
                   return (
                     <div className="col-md-2 col-sm-4" key={data.id}>
-                      <BootstrapCard
+                      <AddToCart
                         data={data}
                         addToCartHandler={props.addToCartHandler}
                       />
@@ -62,7 +78,7 @@ function Home(props) {
             : null}
         </div>
 
-        <div className="container d-flex justify-content-between">
+        <div className="container d-flex justify-content-between my-1">
           <button
             type="button"
             className="btn btn-dark"
@@ -96,6 +112,7 @@ function Home(props) {
           </button>
         </div>
       </div>
+      {/* <Quote/> */}
     </>
   );
 }

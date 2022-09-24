@@ -2,7 +2,7 @@ import { connect } from "react-redux";
 import NavBar from "../components/NavBar";
 
 const mapStateToProps = (state) => ({
-  data: state.cartValue,
+  cartItemsCount: state.cartValue.length,
 });
 
 const mapDispatchToProps = (dispatch) => ({});

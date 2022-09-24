@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import RemoveFromCartCard from "./RemoveFromCartCard";
+import React, { useEffect } from "react";
+import Items from "./Items";
 
 function Cart(props) {
   const {
@@ -31,9 +31,8 @@ function Cart(props) {
           {dataToDisplay
             ? dataToDisplay.map((data) => (
                 <div className="col-md-2 col-sm-4" key={data.id}>
-                  <RemoveFromCartCard
-                    data={data}
-                    removeFromCartHandler={removeFromCartHandler}
+                  <Items
+                    value={[data, removeFromCartHandler, "Remove From Cart: "]}
                   />
                 </div>
               ))
