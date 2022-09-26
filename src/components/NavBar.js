@@ -1,10 +1,9 @@
-import React, { useEffect } from "react";
 import Container from "react-bootstrap/Container";
 import CardHeader from "react-bootstrap/esm/CardHeader";
 import Navbar from "react-bootstrap/Navbar";
 import { Link } from "react-router-dom";
 
-function NavBar(props) {
+function NavBar({handleSearch, cartItemsCount}) {
   function debounce(fn, d) {
     let timer;
     return function (e) {
@@ -15,11 +14,9 @@ function NavBar(props) {
     };
   }
 
-
-
   function takerUserInputFn(e) {
     const userInput = e.target.value.toLowerCase();
-    props.handleSearch(userInput);
+    handleSearch(userInput);
   }
   const callLater = debounce(takerUserInputFn, 1000);
 
@@ -30,7 +27,7 @@ function NavBar(props) {
           <Navbar.Brand href="/">EcomStore</Navbar.Brand>
           <input type="text" onChange={callLater} />
           <Link to="/cart">
-            <h6>Cart: {props.cartItemsCount}</h6>
+            <h6>Cart: {cartItemsCount}</h6>
           </Link>
         </Container>
       </Navbar>

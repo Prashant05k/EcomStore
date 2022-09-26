@@ -1,8 +1,7 @@
 import { useEffect } from "react";
 import Items from "./Items";
 
-function AddToCart(props) {
-  const { data, addToCartHandler } = props;
+function AddToCart({ data, addToCartHandler }) {
   const { id } = data;
 
   useEffect(() => {

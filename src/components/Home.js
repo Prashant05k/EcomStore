@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import AddToCart from "./AddToCart";
 import Quote from "./Quote";
 
-function Home(props) {
+function Home({liftStateSearchData, addToCartHandler}) {
   
   const [storeData, setStoreData] = useState([]);
   const [dataToDisplay, setDataToDisplay] = useState([]);
@@ -37,7 +37,7 @@ function Home(props) {
   }, [pageCount]);
 
   function searchAlgo() {
-    const userInput = props.liftStateSearchData;
+    const userInput = liftStateSearchData;
     const filterData = storeData.filter((item) => {
       const string = item.title.toLowerCase();
 
@@ -48,7 +48,7 @@ function Home(props) {
 
   useEffect(() => {
     searchAlgo();
-  }, [props.liftStateSearchData]);
+  }, [liftStateSearchData]);
 
   function pagenation(buttonName, value) {
     document.getElementById(buttonName).disabled = value;
@@ -68,7 +68,7 @@ function Home(props) {
                     <div className="col-md-2 col-sm-4" key={data.id}>
                       <AddToCart
                         data={data}
-                        addToCartHandler={props.addToCartHandler}
+                        addToCartHandler={addToCartHandler}
                       />
                     </div>
                   );
